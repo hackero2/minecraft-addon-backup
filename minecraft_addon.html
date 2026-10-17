@@ -1,164 +1,1752 @@
 <!DOCTYPE html>
 <html lang="tl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Minecraft Addon</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-:root{--bg:#101713;--panel:#19231d;--panel2:#202d25;--text:#f0f6f1;--muted:#a7b7aa;--green:#62d26f;--line:#304437;--red:#ff6b6b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Poppins,sans-serif;min-height:100vh}
-header{position:sticky;top:0;z-index:5;background:#121b15;border-bottom:1px solid var(--line);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.08rem}.brand-icon{width:38px;height:38px;border-radius:10px;background:var(--green);color:#102014;display:grid;place-items:center;font-size:1.2rem}
-button,.btn{border:0;border-radius:10px;padding:10px 13px;font:600 .85rem Poppins,sans-serif;cursor:pointer;background:var(--green);color:#102014}
-button.secondary,.btn.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
-button.danger{background:#3b2020;color:#ffb2b2;border:1px solid #673333}
-main{max-width:1000px;margin:auto;padding:18px 14px 40px}.hero{background:linear-gradient(135deg,#1e3825,#17241b);border:1px solid var(--line);padding:22px;border-radius:18px;margin-bottom:18px}
-.hero h1{margin:0 0 7px;font-size:1.5rem}.hero p{color:var(--muted);margin:0;font-size:.9rem;line-height:1.6}
-.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0}.search{flex:1;min-width:170px;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 13px;font:inherit;font-size:.88rem;outline:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;min-width:0}.file-icon{width:54px;height:54px;border-radius:13px;background:#263b2b;color:var(--green);display:grid;place-items:center;font-size:1.7rem;margin-bottom:12px}.file-name{font-weight:600;overflow-wrap:anywhere;margin-bottom:5px}.meta{font-size:.76rem;color:var(--muted);line-height:1.6;overflow-wrap:anywhere}.card-actions{display:flex;gap:7px;margin-top:13px}.card-actions button,.card-actions a{flex:1;text-align:center;text-decoration:none;font-size:.78rem;padding:9px 7px}
-.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:35px 10px;background:var(--panel);border:1px dashed var(--line);border-radius:14px}.empty i{font-size:2rem;color:var(--green);margin-bottom:10px}
-.modal{position:fixed;inset:0;background:#000b;z-index:10;display:none;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;width:100%;max-width:470px;max-height:90vh;overflow:auto}.modal-box h2{margin:0 0 14px;font-size:1.15rem}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:.8rem;margin-bottom:6px}.field input{width:100%;padding:11px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:.85rem}.drop{border:1px dashed #52745a;border-radius:12px;padding:18px;text-align:center;background:#142018}.drop i{font-size:1.8rem;color:var(--green);margin-bottom:8px}.picked{font-size:.8rem;color:var(--green);overflow-wrap:anywhere;margin-top:8px}.actions{display:flex;gap:8px;margin-top:17px}.actions button{flex:1}.status{font-size:.82rem;color:var(--muted);margin-top:10px;line-height:1.5}.top-actions{display:flex;gap:8px;align-items:center}#user-label{font-size:.78rem;color:var(--muted)}@media(max-width:430px){.hero{padding:17px}.hero h1{font-size:1.3rem}.top-actions button{padding:9px;font-size:.76rem}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novelife</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-coffee: #8D5B4C;
+            --primary-coffee-dark: #6F4538;
+            --bg-color: #FDFBF7;
+            --card-bg: #F4EBE1;
+            --text-main: #3D2C2E;
+            --text-sub: #7A6567;
+            --border-color: #E6D7CE;
+            --danger-red: #ef4444;
+            --logo-bg: #3D2C2E;
+            --notebook-line: rgba(141, 91, 76, 0.22);
+        }
+
+        [data-theme="dark"] {
+            --primary-coffee: #A47551;
+            --primary-coffee-dark: #8D5B4C;
+            --bg-color: #1E1816;
+            --card-bg: #2C2320;
+            --text-main: #F4EBE1;
+            --text-sub: #B8A398;
+            --border-color: #3F332E;
+            --logo-bg: #1E1816;
+            --notebook-line: rgba(244, 235, 225, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        /* --- SPLASH SCREEN --- */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            text-align: center;
+        }
+
+        #splash-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .book-loader-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .splash-book-icon {
+            font-size: 4.5rem;
+            color: var(--primary-coffee);
+            animation: pulseBook 1.2s infinite ease-in-out;
+            filter: drop-shadow(0 6px 12px rgba(141, 91, 76, 0.25));
+        }
+
+        @keyframes pulseBook {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.15) rotate(-3deg); }
+        }
+
+        .splash-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .splash-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+        }
+
+        .progress-bar-container {
+            width: 220px;
+            height: 7px;
+            background: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #8D5B4C, #6F4538);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        .progress-percentage {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-coffee);
+        }
+
+        /* --- UPLOAD PROGRESS OVERLAY --- */
+        #upload-progress-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1001;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .upload-prog-box {
+            background: var(--bg-color);
+            color: var(--text-main);
+            padding: 24px;
+            border-radius: 16px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .upload-prog-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 16px 0 10px 0;
+        }
+
+        .upload-prog-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--primary-coffee);
+            transition: width 0.15s ease-in-out;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .book-badge {
+            width: 32px;
+            height: 32px;
+            background-color: var(--logo-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-coffee);
+            font-size: 0.95rem;
+            box-shadow: 0 2px 6px rgba(141, 91, 76, 0.2);
+        }
+
+        .app-logo-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        /* --- SEARCH BAR --- */
+        .search-container {
+            padding: 10px 16px 6px 16px;
+            background: var(--bg-color);
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        /* --- NAVIGATION DRAWER --- */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: var(--bg-color);
+            z-index: 600;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-drawer.active {
+            left: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .drawer-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .drawer-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .drawer-user-info {
+            background: var(--card-bg);
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .drawer-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .drawer-item:hover {
+            border-color: var(--primary-coffee);
+        }
+
+        .drawer-item.logout-btn {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--danger-red);
+        }
+
+        .drawer-footer {
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            text-align: center;
+        }
+
+        /* --- NAVIGATION TABS --- */
+        .nav-tabs {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 16px;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border-color);
+            scrollbar-width: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-item {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-sub);
+            padding: 8px 0;
+            cursor: pointer;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .tab-item.active {
+            color: var(--primary-coffee);
+            font-weight: 700;
+        }
+
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-coffee);
+            border-radius: 2px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            flex: 1;
+            padding: 14px 16px;
+            overflow-y: auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .section-change-btn {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            background: var(--card-bg);
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- COMPACT BOOK GRID --- */
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        @media (min-width: 600px) {
+            .book-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .loading-state {
+            grid-column: span 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 0;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            gap: 8px;
+        }
+
+        @media (min-width: 600px) {
+            .loading-state {
+                grid-column: span 5;
+            }
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-coffee);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .book-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 3px 8px rgba(141, 91, 76, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .book-cover-wrapper {
+            width: 100%;
+            height: 160px;
+            position: relative;
+            background: var(--bg-color);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .book-cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge-n {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: var(--primary-coffee);
+            color: white;
+            font-weight: 700;
+            font-size: 0.55rem;
+            padding: 1px 5px;
+            border-radius: 4px;
+        }
+
+        .book-info-box {
+            padding: 6px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .book-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.25;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-author {
+            font-size: 0.68rem;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* --- MODALS --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 400;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 18px;
+            width: 90%;
+            max-width: 420px;
+            max-height: 85vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- READER MODAL --- */
+        #reader-modal .modal-content {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            border-radius: 0 !important;
+            padding: 10px 14px !important;
+            box-shadow: none !important;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-coffee);
+            margin-bottom: 2px;
+        }
+
+        .modal-author {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        #modal-book-img img {
+            max-height: 220px !important;
+            width: 100% !important;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            font-size: 0.95rem;
+            line-height: 34px !important;
+            color: var(--text-main);
+            white-space: pre-wrap;
+            word-break: break-word;
+            flex: 1;
+            overflow-y: auto;
+            text-align: center !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 14px 12px;
+            background-color: var(--card-bg);
+            background-image: linear-gradient(to bottom, var(--notebook-line) 1px, transparent 1px);
+            background-size: 100% 34px !important;
+            background-position: 0 8px;
+            background-attachment: local;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .page-turn-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 650px;
+            margin: 6px 0;
+            padding: 0 4px;
+        }
+
+        .page-turn-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .page-turn-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            font-weight: 600;
+        }
+
+        textarea.form-control {
+            line-height: 34px !important;
+            background-color: var(--card-bg);
+            background-image: linear-gradient(to bottom, var(--notebook-line) 1px, transparent 1px);
+            background-size: 100% 34px !important;
+            background-position: 0 8px;
+            background-attachment: local;
+        }
+
+        .modal-btn-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .close-modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            color: #ffffff;
+            background: linear-gradient(135deg, #8D5B4C, #6F4538);
+            box-shadow: 0 4px 12px rgba(141, 91, 76, 0.2);
+            outline: none;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .auth-switch-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        .auth-switch-text span {
+            color: var(--primary-coffee);
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            color: var(--primary-coffee);
+            padding: 8px 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .reader-tool-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 3px 6px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .reader-tool-btn.active {
+            background: var(--primary-coffee);
+            color: white;
+            border-color: var(--primary-coffee-dark);
+        }
+    </style>
 </head>
-<body>
-<header>
-  <div class="brand"><div class="brand-icon"><i class="fa-solid fa-cube"></i></div><span>Minecraft Addon</span></div>
-  <div class="top-actions"><span id="user-label">Walang uploader name</span><button class="secondary" id="auth-button" onclick="openAuth()">Set Name</button></div>
-</header>
-<main>
-  <section class="hero">
-    <h1><i class="fa-solid fa-cubes" style="color:var(--green)"></i> Minecraft Addon Library</h1>
-    <p>Mag-upload at mag-download ng Minecraft addon files. Suportado ang <b>.mcaddon</b>, <b>.mcpack</b>, <b>.mcworld</b>, at <b>.zip</b>.</p>
-  </section>
-  <div class="toolbar">
-    <input class="search" id="search" placeholder="Maghanap ng addon..." oninput="renderAddons()">
-    <button onclick="loadAddons()" class="secondary"><i class="fa-solid fa-rotate"></i> Refresh</button>
-    <button onclick="openUpload()"><i class="fa-solid fa-file-import"></i> Import File</button>
-  </div>
-  <section class="grid" id="addon-grid"><div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div>Kinukuha ang mga addon...</div></div></section>
-</main>
+<body data-theme="light">
 
-<div class="modal" id="auth-modal">
- <div class="modal-box">
-  <h2 id="auth-title">Mag-login</h2>
-  <div class="field"><label>Username</label><input id="username" autocomplete="username" placeholder="Username"></div>
-  <div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password"></div>
-  <div class="actions"><button class="secondary" onclick="closeModal('auth-modal')">Kanselahin</button><button id="auth-submit" onclick="submitAuth()">Mag-login</button></div>
-  <p class="status" id="auth-switch" style="cursor:pointer" onclick="toggleAuthMode()">Wala pang account? <b>Mag-register</b></p>
-  <p class="status" id="auth-status"></p>
- </div>
-</div>
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen">
+        <div class="book-loader-wrapper">
+            <i class="fa-solid fa-book-open splash-book-icon"></i>
+        </div>
+        <div class="splash-title">Novelife</div>
+        <div class="splash-subtitle">Binubuksan ang mga pahina mula sa cloud...</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+        <div class="progress-percentage" id="progress-percentage">0%</div>
+    </div>
 
-<div class="modal" id="upload-modal">
- <div class="modal-box">
-  <h2><i class="fa-solid fa-file-import" style="color:var(--green)"></i> Import Minecraft Addon</h2>
-  <div class="field"><label>Pangalan ng Addon</label><input id="addon-name" placeholder="Hal. Realistic Vehicles Addon"></div>
-  <div class="field"><label>Paglalarawan (opsyonal)</label><input id="addon-description" placeholder="Maikling detalye ng addon"></div>
-  <div class="field"><label>Addon file</label>
-   <div class="drop"><i class="fa-solid fa-file-arrow-up"></i><div>Pumili ng file mula sa device</div><input id="addon-file" type="file" accept=".mcaddon,.mcpack,.mcworld,.zip,application/zip" onchange="showPickedFile()"><div id="picked-file" class="picked">Wala pang napipiling file</div></div>
-   <div class="status">Limitasyon sa upload: 8 MB. Ang pangalan ng uploader ay display name lamang at hindi account authentication.</div>
-  </div>
-  <div class="actions"><button class="secondary" onclick="closeModal('upload-modal')">Kanselahin</button><button id="upload-submit" onclick="uploadAddon()">I-upload</button></div>
-  <p class="status" id="upload-status"></p>
- </div>
-</div>
-<script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzg7qwIM3-KzdbAWT8VUJBMZGo_KyxKzIjgVAL17zgDEUhykE47KpvvHgyGMTGUHVnT/exec";
-let addons = [];
-let currentUser = localStorage.getItem('minecraft_addon_user') || '';
-let registerMode = false;
+    <!-- UPLOAD PROGRESS OVERLAY -->
+    <div id="upload-progress-overlay">
+        <div class="upload-prog-box">
+            <h3 style="font-size: 1rem; color: var(--primary-coffee); font-weight: 700;">Nag-a-upload...</h3>
+            <p id="upload-status-text" style="font-size: 0.8rem; color: var(--text-sub); margin-top: 4px;">Inihahanda ang data...</p>
+            <div class="upload-prog-bar-bg">
+                <div class="upload-prog-bar-fill" id="upload-prog-bar-fill"></div>
+            </div>
+            <span id="upload-prog-percent" style="font-weight: 700; font-size: 0.85rem; color: var(--primary-coffee);">0%</span>
+        </div>
+    </div>
 
-function updateUserUI(){
- document.getElementById('user-label').textContent = currentUser ? '@'+currentUser : 'Walang uploader name';
- document.getElementById('auth-button').textContent = currentUser ? 'Logout' : 'Set Name';
-}
-function openAuth(){
- if(currentUser){if(confirm('Mag-logout?')){currentUser='';localStorage.removeItem('minecraft_addon_user');updateUserUI();}return;}
- const username=prompt('Ilagay ang pangalan na ipapakita bilang uploader:');
- if(username && username.trim()){
-  currentUser=username.trim().slice(0,100);
-  localStorage.setItem('minecraft_addon_user',currentUser);
-  updateUserUI();
- }
-}
-function updateAuthUI(){
- document.getElementById('auth-title').textContent=registerMode?'Gumawa ng Account':'Mag-login';
- document.getElementById('auth-submit').textContent=registerMode?'Mag-register':'Mag-login';
- document.getElementById('auth-switch').innerHTML=registerMode?'May account na? <b>Mag-login</b>':'Wala pang account? <b>Mag-register</b>';
-}
-function toggleAuthMode(){registerMode=!registerMode;updateAuthUI();document.getElementById('auth-status').textContent='';}
-async function submitAuth(){
- const username=document.getElementById('username').value.trim(),password=document.getElementById('password').value;
- const status=document.getElementById('auth-status');
- if(!username||!password){status.textContent='Ilagay ang username at password.';return;}
- status.textContent='Kumokonekta...';
- try{
-  const r=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:registerMode?'register':'login',username,password})});
-  const data=await r.json();
-  if(data.status==='success'){currentUser=username;localStorage.setItem('minecraft_addon_user',username);updateUserUI();closeModal('auth-modal');status.textContent='';}
-  else status.textContent=data.message||'Hindi nagtagumpay. Subukan muli.';
- }catch(e){status.textContent='Hindi makakonekta sa server.';}
-}
-function closeModal(id){document.getElementById(id).classList.remove('show');}
-function openUpload(){
- if(!currentUser){alert('Magtakda muna ng uploader name.');openAuth();if(!currentUser)return;}
- document.getElementById('addon-name').value='';
- document.getElementById('addon-description').value='';
- document.getElementById('addon-file').value='';
- document.getElementById('picked-file').textContent='Wala pang napipiling file';
- document.getElementById('upload-status').textContent='';
- document.getElementById('upload-modal').classList.add('show');
-}
-function showPickedFile(){
- const f=document.getElementById('addon-file').files[0];
- document.getElementById('picked-file').textContent=f?`${f.name} • ${formatBytes(f.size)}`:'Wala pang napipiling file';
- if(f&&!/\.(mcaddon|mcpack|mcworld|zip)$/i.test(f.name))alert('Pumili ng .mcaddon, .mcpack, .mcworld, o .zip file.');
-}
-function formatBytes(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(2)+' MB';}
-function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function fileIcon(name){const ext=(name.split('.').pop()||'').toLowerCase();return ext==='zip'?'fa-file-zipper':'fa-cube';}
-async function uploadAddon(){
- const file=document.getElementById('addon-file').files[0],name=document.getElementById('addon-name').value.trim(),description=document.getElementById('addon-description').value.trim(),status=document.getElementById('upload-status'),btn=document.getElementById('upload-submit');
- if(!file){status.textContent='Pumili muna ng addon file gamit ang Import File.';return;}
- if(!/\.(mcaddon|mcpack|mcworld|zip)$/i.test(file.name)){status.textContent='Hindi suportadong file type.';return;}
- if(file.size>8*1024*1024){status.textContent='Masyadong malaki ang file para sa Base64 upload. Limitasyon sa interface na ito ay 8 MB; kailangan ng ibang upload flow para sa mas malalaking file.';return;}
- btn.disabled=true;status.textContent='Binabasa ang file...';
- try{
-  const base64=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=reject;reader.readAsDataURL(file);});
-  status.textContent='Ipinapadala sa server...';
-  const response=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'uploadAddon',name:name||file.name,description,filename:file.name,mimeType:file.type||'application/octet-stream',fileData:base64,author:currentUser,username:currentUser,size:file.size})});
-  const result=await response.json();
-  if(result.success){status.textContent='Matagumpay na na-upload!';closeModal('upload-modal');await loadAddons();}
-  else status.textContent=result.message||'Hindi na-upload. Siguraduhing na-update ang Apps Script backend para sa uploadAddon.';
- }catch(e){status.textContent='Upload failed. Tingnan kung may uploadAddon action ang Apps Script at may Google Drive folder na naka-configure.';}
- finally{btn.disabled=false;}
-}
-async function loadAddons(){
- const grid=document.getElementById('addon-grid');grid.innerHTML='<div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div>Kinukuha ang mga addon...</div></div>';
- try{
-  const response=await fetch(WEB_APP_URL+'?action=getAddons');const data=await response.json();
-  addons=Array.isArray(data)?data:(data.data||data.addons||[]);
-  renderAddons();
- }catch(e){grid.innerHTML='<div class="empty"><i class="fa-solid fa-triangle-exclamation"></i><div>Hindi makuha ang addon list. Kailangan ng Apps Script backend na may action=getAddons.</div></div>';}
-}
-function renderAddons(){
- const grid=document.getElementById('addon-grid'),q=document.getElementById('search').value.trim().toLowerCase();
- const filtered=addons.filter(a=>String(a.name||a.title||a.filename||'').toLowerCase().includes(q)||String(a.description||'').toLowerCase().includes(q)||String(a.author||'').toLowerCase().includes(q));
- if(!filtered.length){grid.innerHTML='<div class="empty"><i class="fa-solid fa-box-open"></i><div>Wala pang addon. Pindutin ang <b>Import File</b> para mag-upload.</div></div>';return;}
- grid.innerHTML=filtered.map(a=>{
-  const id=safe(a.id||''),name=safe(a.name||a.title||a.filename||'Minecraft Addon'),filename=safe(a.filename||'Addon file'),desc=safe(a.description||'Walang paglalarawan.'),author=safe(a.author||a.username||'Unknown'),url=safe(a.downloadUrl||a.url||a.fileUrl||'');
-  const owner=currentUser&&String(a.author||a.username||'').toLowerCase()===currentUser.toLowerCase();
-  return `<article class="card"><div class="file-icon"><i class="fa-solid ${fileIcon(filename)}"></i></div><div class="file-name">${name}</div><div class="meta">${filename}<br>${desc}<br>Uploader: ${author}</div><div class="card-actions">${url?`<a class="btn" href="${url}" target="_blank" rel="noopener"><i class="fa-solid fa-download"></i> Download</a>`:'<span class="meta">No download link</span>'}${owner?`<button class="danger" onclick="deleteAddon('${id}')"><i class="fa-solid fa-trash"></i></button>`:''}</div></article>`;
- }).join('');
-}
-async function deleteAddon(id){
- if(!id||!confirm('Sigurado ka bang buburahin ang addon na ito?'))return;
- try{const r=await fetch(WEB_APP_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'deleteAddon',id,author:currentUser})});const d=await r.json();if(d.success)loadAddons();else alert(d.message||'Hindi nabura.');}
- catch(e){alert('Hindi makakonekta sa server.');}
-}
-updateUserUI();loadAddons();
-</script>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle-btn" onclick="toggleDrawer()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="book-badge">
+                <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <div class="app-logo-title">
+                Novelife
+            </div>
+        </div>
+    </header>
+
+    <!-- SEARCH BAR -->
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="search-bar" id="search-input" placeholder="Maghanap ng pamagat o may-akda..." oninput="handleSearchInput()">
+        </div>
+    </div>
+
+    <!-- NAVIGATION DRAWER -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <div class="nav-drawer" id="nav-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">Menu</div>
+            <button class="drawer-close-btn" onclick="toggleDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="drawer-user-info" id="drawer-user-box">
+            <i class="fa-solid fa-user-circle" style="font-size: 1.3rem; color: var(--primary-coffee);"></i>
+            <span id="drawer-username-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Hindi naka-login</span>
+        </div>
+
+        <div class="drawer-items">
+            <!-- Dark Mode Button -->
+            <div class="drawer-item" onclick="toggleDarkMode()">
+                <i class="fa-solid fa-moon" id="dark-mode-icon"></i>
+                <span id="dark-mode-text">Dark Mode</span>
+            </div>
+
+            <!-- MY POSTS BUTTON -->
+            <div class="drawer-item" id="drawer-my-posts-btn" onclick="openMyPostsView()" style="display: none;">
+                <i class="fa-solid fa-book-open-reader" style="color: var(--primary-coffee);"></i>
+                <span>All Posts (Mga Kwento Ko)</span>
+            </div>
+            
+            <!-- DOWNLOAD OFFLINE BUTTON -->
+            <div class="drawer-item" onclick="exportOfflineStoriesToInternal()">
+                <i class="fa-solid fa-cloud-arrow-down" style="color: var(--primary-coffee);"></i>
+                <span>Download Offline (.json)</span>
+            </div>
+
+            <!-- IMPORT BACKUP BUTTON -->
+            <div class="drawer-item" onclick="triggerImportFile()">
+                <i class="fa-solid fa-file-arrow-up" style="color: var(--primary-coffee);"></i>
+                <span>Import Backup</span>
+            </div>
+            <input type="file" id="import-file-input" accept=".json" style="display: none;" onchange="importOfflineStories(event)">
+
+            <!-- Social / Links -->
+            <a href="https://youtube.com/@codetech-e1p?si=uLhHSHMkv0sIiAYq" target="_blank" class="drawer-item" style="color: inherit; text-decoration: none;">
+                <i class="fa-brands fa-youtube" style="color: #ff0000; font-size: 1.1rem;"></i>
+                <span>YouTube</span>
+            </a>
+            <a href="mailto:codetech281920@gmail.com" class="drawer-item" style="color: inherit; text-decoration: none;">
+                <i class="fa-solid fa-envelope" style="color: var(--primary-coffee);"></i>
+                <span style="font-size: 0.8rem; word-break: break-all;">codetech281920@gmail.com</span>
+            </a>
+
+            <!-- AUTH / LOGOUT BUTTON -->
+            <div class="drawer-item" id="drawer-dynamic-auth-btn" onclick="handleDrawerAuthAction()" style="background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.3); color: var(--danger-red); font-weight: 600;">
+                <i class="fa-solid fa-right-to-bracket" id="drawer-dynamic-icon"></i>
+                <span id="drawer-dynamic-text">Mag-login / Mag-register</span>
+            </div>
+        </div>
+
+        <div class="drawer-footer">
+            Novelife App © 2026
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs" id="main-nav-tabs">
+        <div class="tab-item active" onclick="switchTab(this, 'For You')">For You</div>
+        <div class="tab-item" onclick="switchTab(this, 'Bookmarks')"><i class="fa-solid fa-bookmark"></i> Bookmarks</div>
+        <div class="tab-item" onclick="switchTab(this, 'Horror')">Horror</div>
+        <div class="tab-item" onclick="switchTab(this, 'Action')">Action</div>
+        <div class="tab-item" onclick="switchTab(this, 'Fantasy')">Fantasy</div>
+        <div class="tab-item" onclick="switchTab(this, 'Romance')">Romance</div>
+    </div>
+
+    <!-- Main Section -->
+    <main>
+        <div class="section-header">
+            <div class="section-title" id="main-section-title">Book sheltered</div>
+            <div class="section-change-btn" onclick="fetchStoriesFromCloud()">
+                Refresh <i class="fa-solid fa-rotate-right"></i>
+            </div>
+        </div>
+
+        <div class="book-grid" id="book-grid-container"></div>
+    </main>
+
+    <!-- LOGIN / REGISTER MODAL -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content" style="max-width: 400px; border-radius: 18px;">
+            <button onclick="closeAuthModalForce()" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.1rem; color: var(--text-sub); cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="modal-title" id="auth-modal-title">Mag-register sa Novelife</div>
+            <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px;">Kailangan mong gumawa ng account o mag-login para makapagbasa at mag-publish.</p>
+            
+            <div class="form-group" style="margin-top: 4px;">
+                <label>Username:</label>
+                <input type="text" class="form-control" id="auth-username" placeholder="Ilagay ang username...">
+            </div>
+
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" id="auth-password" placeholder="Ilagay ang password...">
+            </div>
+
+            <div class="modal-btn-row" style="margin-top: 8px;">
+                <button class="close-modal-btn" style="background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color);" onclick="closeAuthModalForce()">Kanselahin</button>
+                <button class="close-modal-btn" id="auth-submit-btn" onclick="handleAuthSubmit()">Mag-register</button>
+            </div>
+
+            <div class="auth-switch-text" id="auth-switch-btn" onclick="toggleAuthMode()">
+                May account na? <span>Mag-login</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PUBLISH / EDIT STORY MODAL -->
+    <div class="modal" id="publish-modal">
+        <div class="modal-content" style="max-width: 480px; border-radius: 18px;">
+            <div class="modal-title" id="publish-modal-title">Mag-publish ng Kwento</div>
+            <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 12px;" id="publish-modal-subtitle">Ibahagi ang iyong isinulat sa mga mambabasa.</p>
+            
+            <input type="hidden" id="editing-story-id" value="">
+
+            <div class="form-group">
+                <label>Pamagat (Title):</label>
+                <input type="text" class="form-control" id="story-title" placeholder="Pamagat ng iyong nobela...">
+            </div>
+
+            <div class="form-group">
+                <label>Kategorya (Category):</label>
+                <select class="form-control" id="story-category">
+                    <option value="For You">For You</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Action">Action</option>
+                    <option value="Fantasy">Fantasy</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Book Cover Image:</label>
+                <input type="file" class="form-control" id="story-cover-file" accept="image/*" onchange="previewCoverImage(event)">
+            </div>
+
+            <div id="cover-preview-container" style="margin-bottom: 10px; display: none;">
+                <img id="cover-preview-img" src="" alt="Cover Preview" style="width: 75px; height: 100px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color);">
+            </div>
+
+            <div class="form-group">
+                <label>Nilalaman / Kwento (Content):</label>
+                <textarea class="form-control" id="story-content" rows="5" placeholder="Isulat o i-paste ang iyong kwento dito..." style="min-height: 100px; resize: vertical;"></textarea>
+            </div>
+
+            <div class="modal-btn-row">
+                <button class="close-modal-btn" style="background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border-color);" onclick="closePublishModal()">Kanselahin</button>
+                <button class="close-modal-btn" id="publish-submit-btn" onclick="submitStoryToCloud()">I-publish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULL SCREEN READER MODAL -->
+    <div class="modal" id="reader-modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; width: 100%; max-width: 650px; flex-wrap: wrap; gap: 3px;">
+                <div class="modal-title" id="modal-book-title" style="margin: 0; font-size: 0.95rem;">Title</div>
+                
+                <div style="display: flex; gap: 2px; align-items: center; flex-wrap: wrap;">
+                    <button class="reader-tool-btn" id="autoscroll-btn" onclick="toggleAutoScroll()" title="Auto Scroll">
+                        <i class="fa-solid fa-play"></i> Auto
+                    </button>
+                    <button class="reader-tool-btn" id="stopscroll-btn" onclick="stopAutoScroll()" title="Stop">
+                        <i class="fa-solid fa-stop"></i>
+                    </button>
+                    <button class="reader-tool-btn" id="speed-btn" onclick="changeScrollSpeed()">1x</button>
+                    <button class="reader-tool-btn" id="bookmark-action-btn" onclick="toggleBookmarkCurrentBook()">
+                        <i class="fa-regular fa-bookmark"></i> Bookmark
+                    </button>
+                    <button class="reader-tool-btn" id="toggle-image-btn" onclick="toggleCoverImage()">
+                        <i class="fa-solid fa-eye-slash"></i> Hide
+                    </button>
+                    <button onclick="adjustReaderFont('decrease')" class="reader-tool-btn">A-</button>
+                    <button onclick="adjustReaderFont('increase')" class="reader-tool-btn">A+</button>
+                </div>
+            </div>
+
+            <div class="modal-author" id="modal-book-author" style="margin-bottom: 4px; width: 100%; max-width: 650px;"><i class="fa-solid fa-user"></i> Author</div>
+            
+            <div id="modal-book-img" style="margin-bottom: 6px; width: 100%; text-align: center;"></div>
+            
+            <!-- NOTEBOOK PAGE CONTENT -->
+            <div class="modal-body" id="modal-book-content">Content goes here...</div>
+            
+            <!-- PAGE TURN NAVIGATION -->
+            <div class="page-turn-container">
+                <button class="page-turn-btn" id="prev-page-btn" onclick="changeReaderPage(-1)">
+                    <i class="fa-solid fa-chevron-left"></i> Nakaraan
+                </button>
+                <span class="page-indicator" id="page-indicator-text">Pahina 1 / 1</span>
+                <button class="page-turn-btn" id="next-page-btn" onclick="changeReaderPage(1)">
+                    Susunod <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="modal-btn-row" id="reader-action-buttons">
+                <button class="close-modal-btn" onclick="closeReaderModal()">
+                    <i class="fa-solid fa-xmark"></i> Isara
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marquee Footer -->
+    <footer>
+        <marquee behavior="scroll" direction="left">Created by codetech ❤</marquee>
+    </footer>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwoie73DN1oMPXHOYaPxlzBeD7x2b8r5CLl0zT8ANmLDaSA_BF5AFRs-Gc2FzDXiRqd/exec";
+
+        let allStories = [];
+        let currentTab = 'For You';
+        let searchQuery = '';
+        let isViewingMyPosts = false;
+        let isRegisterMode = true;
+        let currentUser = null;
+        let currentReaderFontSize = 1;
+        let uploadedCoverBase64 = "";
+        let isImageHidden = false;
+        let currentlyReadingBookId = null;
+
+        let readerPages = [];
+        let currentReaderPageIndex = 0;
+
+        let autoScrollInterval = null;
+        let isAutoScrolling = false;
+        let scrollSpeedIndex = 0;
+        const scrollSpeeds = [
+            { label: '1x', delay: 50, step: 1 },
+            { label: '2x', delay: 30, step: 1.5 },
+            { label: '3x', delay: 20, step: 2 }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedTheme();
+            loadSavedUser();
+            fetchStoriesFromCloud();
+            runBookLoadingAnimation();
+        });
+
+        function loadSavedUser() {
+            const savedUser = localStorage.getItem('novelife_current_user');
+            if (savedUser) {
+                currentUser = savedUser;
+                updateSessionUI();
+            }
+        }
+
+        function runBookLoadingAnimation() {
+            let currentPercent = 0;
+            const fillElement = document.getElementById('progress-bar-fill');
+            const percentElement = document.getElementById('progress-percentage');
+            const splashScreen = document.getElementById('splash-screen');
+
+            const loadingInterval = setInterval(() => {
+                currentPercent += Math.floor(Math.random() * 8) + 3;
+                if (currentPercent >= 100) {
+                    currentPercent = 100;
+                    clearInterval(loadingInterval);
+                    
+                    setTimeout(() => {
+                        splashScreen.classList.add('fade-out');
+                    }, 300);
+                }
+                fillElement.style.width = currentPercent + '%';
+                percentElement.innerText = currentPercent + '%';
+            }, 40);
+        }
+
+        function simulateUploadProgress(statusMessage, callback) {
+            const overlay = document.getElementById('upload-progress-overlay');
+            const fillBar = document.getElementById('upload-prog-bar-fill');
+            const percentTxt = document.getElementById('upload-prog-percent');
+            const statusTxt = document.getElementById('upload-status-text');
+
+            overlay.style.display = 'flex';
+            statusTxt.innerText = statusMessage;
+            
+            let progress = 10;
+            fillBar.style.width = progress + '%';
+            percentTxt.innerText = progress + '%';
+
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 5;
+                if (progress >= 90) {
+                    progress = 90;
+                    clearInterval(interval);
+                }
+                fillBar.style.width = progress + '%';
+                percentTxt.innerText = progress + '%';
+            }, 120);
+
+            window.finishUploadProgress = function(isSuccess) {
+                clearInterval(interval);
+                fillBar.style.width = '100%';
+                percentTxt.innerText = '100%';
+                statusTxt.innerText = isSuccess ? 'Tagumpay!' : 'May error!';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    fillBar.style.width = '0%';
+                    percentTxt.innerText = '0%';
+                }, 400);
+                if (typeof callback === 'function') callback();
+            };
+        }
+
+        function toggleDrawer() {
+            document.getElementById('nav-drawer').classList.toggle('active');
+            document.getElementById('drawer-overlay').classList.toggle('active');
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('dark-mode-icon');
+            const text = document.getElementById('dark-mode-text');
+
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('novelife_theme', 'light');
+                icon.className = 'fa-solid fa-moon';
+                text.innerText = 'Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('novelife_theme', 'dark');
+                icon.className = 'fa-solid fa-sun';
+                text.innerText = 'Light Mode';
+            }
+        }
+
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('novelife_theme');
+            const icon = document.getElementById('dark-mode-icon');
+            const text = document.getElementById('dark-mode-text');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                if (icon) icon.className = 'fa-solid fa-sun';
+                if (text) text.innerText = 'Light Mode';
+            }
+        }
+
+        function exportOfflineStoriesToInternal() {
+            toggleDrawer();
+            if (allStories.length === 0) {
+                alert('Walang mga kwento na mada-download.');
+                return;
+            }
+            const jsonString = JSON.stringify(allStories, null, 2);
+            
+            try {
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `novelife_offline_${Date.now()}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                alert('Matagumpay na nai-download ang offline backup file!');
+            } catch (err) {
+                alert('Hindi ma-download ang file sa device na ito.');
+            }
+        }
+
+        function triggerImportFile() {
+            document.getElementById('import-file-input').click();
+        }
+
+        function importOfflineStories(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (Array.isArray(importedData)) {
+                        const existingIds = new Set(allStories.map(s => String(s.id)));
+                        importedData.forEach(item => {
+                            if (!existingIds.has(String(item.id))) {
+                                allStories.push({
+                                    id: String(item.id || Date.now() + Math.random()),
+                                    title: item.title || item.Pamagat || 'Untitled',
+                                    author: item.author || item.username || 'codetech',
+                                    category: item.category || 'For You',
+                                    content: item.content || item.pages || 'Walang nilalaman.',
+                                    cover: item.cover || ''
+                                });
+                            }
+                        });
+                        renderBooks();
+                        toggleDrawer();
+                        alert('Matagumpay na na-import ang mga kwento sa app!');
+                    } else {
+                        alert('Mali ang format ng JSON file.');
+                    }
+                } catch (err) {
+                    alert('Hindi mabasa ang JSON file.');
+                }
+                event.target.value = '';
+            };
+            reader.readAsText(file);
+        }
+
+        function adjustReaderFont(action) {
+            if (action === 'increase' && currentReaderFontSize < 1.2) {
+                currentReaderFontSize += 0.1;
+            } else if (action === 'decrease' && currentReaderFontSize > 0.9) {
+                currentReaderFontSize -= 0.1;
+            }
+            const contentBox = document.getElementById('modal-book-content');
+            if (contentBox) contentBox.style.fontSize = currentReaderFontSize + 'rem';
+        }
+
+        function toggleCoverImage() {
+            isImageHidden = !isImageHidden;
+            const imgContainer = document.getElementById('modal-book-img');
+            const toggleBtn = document.getElementById('toggle-image-btn');
+
+            if (isImageHidden) {
+                imgContainer.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-eye"></i> Show';
+            } else {
+                imgContainer.style.display = 'block';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i> Hide';
+            }
+        }
+
+        function toggleAutoScroll() {
+            isAutoScrolling = !isAutoScrolling;
+            const btn = document.getElementById('autoscroll-btn');
+
+            if (isAutoScrolling) {
+                btn.classList.add('active');
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i> Auto';
+                startAutoScroll();
+            } else {
+                stopAutoScroll();
+            }
+        }
+
+        function startAutoScroll() {
+            stopAutoScrollIntervalOnly();
+            const contentBox = document.getElementById('modal-book-content');
+            const currentSetting = scrollSpeeds[scrollSpeedIndex];
+
+            autoScrollInterval = setInterval(() => {
+                if (contentBox) {
+                    contentBox.scrollTop += currentSetting.step;
+                    if (contentBox.scrollTop + contentBox.clientHeight >= contentBox.scrollHeight - 2) {
+                        if (currentReaderPageIndex < readerPages.length - 1) {
+                            changeReaderPage(1);
+                        } else {
+                            stopAutoScroll();
+                        }
+                    }
+                }
+            }, currentSetting.delay);
+        }
+
+        function stopAutoScrollIntervalOnly() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        function stopAutoScroll() {
+            stopAutoScrollIntervalOnly();
+            isAutoScrolling = false;
+            const btn = document.getElementById('autoscroll-btn');
+            if (btn) {
+                btn.classList.remove('active');
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> Auto';
+            }
+        }
+
+        function changeScrollSpeed() {
+            scrollSpeedIndex = (scrollSpeedIndex + 1) % scrollSpeeds.length;
+            document.getElementById('speed-btn').innerText = scrollSpeeds[scrollSpeedIndex].label;
+            if (isAutoScrolling) startAutoScroll();
+        }
+
+        function updateSessionUI() {
+            const dynamicBtn = document.getElementById('drawer-dynamic-auth-btn');
+            const dynamicText = document.getElementById('drawer-dynamic-text');
+            const dynamicIcon = document.getElementById('drawer-dynamic-icon');
+            const myPostsBtn = document.getElementById('drawer-my-posts-btn');
+
+            if (currentUser) {
+                document.getElementById('drawer-username-text').innerText = currentUser;
+                myPostsBtn.style.display = 'flex';
+                
+                dynamicText.innerText = "Mag-logout";
+                dynamicIcon.className = "fa-solid fa-arrow-right-from-bracket";
+                dynamicBtn.className = "drawer-item logout-btn";
+            } else {
+                document.getElementById('drawer-username-text').innerText = "Hindi naka-login";
+                myPostsBtn.style.display = 'none';
+                
+                dynamicText.innerText = "Mag-login / Mag-register";
+                dynamicIcon.className = "fa-solid fa-right-to-bracket";
+                dynamicBtn.className = "drawer-item";
+            }
+        }
+
+        function handleDrawerAuthAction() {
+            toggleDrawer();
+            if (currentUser) {
+                currentUser = null;
+                localStorage.removeItem('novelife_current_user');
+                isViewingMyPosts = false;
+                updateSessionUI();
+                openAuthModal('login');
+            } else {
+                openAuthModal('login');
+            }
+        }
+
+        function openAuthModal(mode = 'register') {
+            isRegisterMode = (mode === 'register');
+            updateAuthModalUI();
+            document.getElementById('auth-modal').classList.add('active');
+        }
+
+        function closeAuthModalForce() {
+            document.getElementById('auth-modal').classList.remove('active');
+        }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            updateAuthModalUI();
+        }
+
+        function updateAuthModalUI() {
+            const title = document.getElementById('auth-modal-title');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const switchTxt = document.getElementById('auth-switch-btn');
+
+            if (isRegisterMode) {
+                title.innerText = "Mag-register sa Novelife";
+                submitBtn.innerText = "Mag-register";
+                switchTxt.innerHTML = 'May account na? <span>Mag-login</span>';
+            } else {
+                title.innerText = "Mag-login sa Novelife";
+                submitBtn.innerText = "Mag-login";
+                switchTxt.innerHTML = 'Wala pang account? <span>Mag-register</span>';
+            }
+        }
+
+        async function handleAuthSubmit() {
+            const u = document.getElementById('auth-username').value.trim();
+            const p = document.getElementById('auth-password').value.trim();
+
+            if (!u || !p) {
+                alert('Punan ang lahat ng espasyo.');
+                return;
+            }
+
+            simulateUploadProgress("Nag-aauthenticate sa Cloud...", null);
+            const actionType = isRegisterMode ? "register" : "login";
+
+            try {
+                let res = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: actionType, username: u, password: p })
+                });
+                let result = await res.json();
+
+                if (result.status === "success") {
+                    currentUser = u;
+                    localStorage.setItem('novelife_current_user', currentUser);
+                    if (window.finishUploadProgress) window.finishUploadProgress(true);
+                    
+                    updateSessionUI();
+                    closeAuthModalForce();
+                    fetchStoriesFromCloud();
+                    
+                    alert(isRegisterMode ? 'Matagumpay na nakapag-register!' : `Maligayang pagbabalik, ${currentUser}!`);
+                } else {
+                    if (window.finishUploadProgress) window.finishUploadProgress(false);
+                    alert(result.message || 'May naganap na error.');
+                }
+            } catch (err) {
+                if (window.finishUploadProgress) window.finishUploadProgress(false);
+                alert('Hindi makakonekta sa server.');
+            }
+        }
+
+        function openPublishModal() {
+            if (!currentUser) {
+                alert('Kailangan mong mag-login muna bago makapag-publish ng kwento.');
+                openAuthModal('login');
+                return;
+            }
+
+            document.getElementById('editing-story-id').value = "";
+            document.getElementById('story-title').value = "";
+            document.getElementById('story-category').value = "For You";
+            document.getElementById('story-content').value = "";
+            document.getElementById('story-cover-file').value = "";
+            document.getElementById('cover-preview-container').style.display = 'none';
+            uploadedCoverBase64 = "";
+
+            document.getElementById('publish-modal').classList.add('active');
+        }
+
+        function closePublishModal() {
+            document.getElementById('publish-modal').classList.remove('active');
+        }
+
+        function previewCoverImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        let width = img.width;
+                        let height = img.height;
+                        const maxDim = 400;
+                        if (width > height && width > maxDim) {
+                            height *= maxDim / width;
+                            width = maxDim;
+                        } else if (height > maxDim) {
+                            width *= maxDim / height;
+                            height = maxDim;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        uploadedCoverBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                        document.getElementById('cover-preview-img').src = uploadedCoverBase64;
+                        document.getElementById('cover-preview-container').style.display = 'block';
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function submitStoryToCloud() {
+            const title = document.getElementById('story-title').value.trim();
+            const category = document.getElementById('story-category').value;
+            const content = document.getElementById('story-content').value.trim();
+
+            if (!title || !content) {
+                alert('Mangyaring punan ang Pamagat at Nilalaman ng kwento.');
+                return;
+            }
+
+            closePublishModal();
+            simulateUploadProgress("Ipinapasa sa server...", null);
+
+            try {
+                let res = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: "publish",
+                        id: "",
+                        title: title,
+                        author: currentUser,
+                        category: category,
+                        cover: uploadedCoverBase64,
+                        content: content
+                    })
+                });
+                let result = await res.json();
+
+                if (result.status === "success") {
+                    if (window.finishUploadProgress) window.finishUploadProgress(true);
+                    alert('Matagumpay na naipublish ang iyong kwento sa Novelife!');
+                    fetchStoriesFromCloud();
+                } else {
+                    if (window.finishUploadProgress) window.finishUploadProgress(false);
+                    alert('May error sa server: ' + (result.message || ''));
+                }
+            } catch (err) {
+                if (window.finishUploadProgress) window.finishUploadProgress(false);
+                alert('Walang internet connection. Hindi na-publish ang kwento.');
+            }
+        }
+
+        async function fetchStoriesFromCloud() {
+            const container = document.getElementById('book-grid-container');
+            container.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <span>Kinukuha ang mga libro mula sa cloud...</span>
+                </div>
+            `;
+
+            try {
+                let res = await fetch(WEB_APP_URL);
+                let rawData = await res.json();
+                
+                let data = rawData;
+                if (!Array.isArray(rawData)) {
+                    data = rawData.data || rawData.stories || rawData.posts || rawData.result || [];
+                }
+
+                if (Array.isArray(data)) {
+                    allStories = data.map((item, index) => ({
+                        id: item.id !== undefined && item.id !== "" ? String(item.id) : String(Date.now() + index),
+                        title: item.title || item.Pamagat || 'Untitled Novel',
+                        author: item.username || item.author || item.MayAkda || 'codetech',
+                        category: item.category || item.Kategorya || 'For You',
+                        content: Array.isArray(item.pages) ? item.pages.join("\n\n") : (item.content || item.pages || item.Nilalaman || "Walang nilalaman ang kwentong ito."),
+                        cover: item.cover || item.Cover || "",
+                        hasBadge: index % 2 === 0
+                    }));
+                    renderBooks();
+                }
+            } catch (err) {
+                console.error("Hindi makuha ang mga kwento mula sa cloud:", err);
+                container.innerHTML = `<p style="grid-column: span 3; text-align: center; color: var(--danger-red); padding: 30px 0;">Hindi maka-connect sa server para kumuha ng libro.</p>`;
+            }
+        }
+
+        function switchTab(element, tabName) {
+            isViewingMyPosts = false;
+            document.getElementById('main-section-title').innerText = tabName === 'Bookmarks' ? 'Mga Naka-bookmark' : "Book sheltered";
+            document.querySelectorAll('#main-nav-tabs .tab-item').forEach(el => el.classList.remove('active'));
+            if (element) element.classList.add('active');
+            currentTab = tabName;
+            renderBooks();
+        }
+
+        function openMyPostsView() {
+            toggleDrawer();
+            isViewingMyPosts = true;
+            document.getElementById('main-section-title').innerText = "All Posts (Mga Kwento Ko)";
+            document.querySelectorAll('#main-nav-tabs .tab-item').forEach(el => el.classList.remove('active'));
+            renderBooks();
+        }
+
+        function handleSearchInput() {
+            searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+            renderBooks();
+        }
+
+        function getBookmarks() {
+            try {
+                return JSON.parse(localStorage.getItem('novelife_bookmarks') || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function toggleBookmarkCurrentBook() {
+            if (!currentlyReadingBookId) return;
+            let bookmarks = getBookmarks();
+            const index = bookmarks.indexOf(String(currentlyReadingBookId));
+
+            const btn = document.getElementById('bookmark-action-btn');
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+                btn.innerHTML = '<i class="fa-regular fa-bookmark"></i> Bookmark';
+                alert('Tinanggal sa Bookmarks.');
+            } else {
+                bookmarks.push(String(currentlyReadingBookId));
+                btn.innerHTML = '<i class="fa-solid fa-bookmark" style="color:var(--primary-coffee);"></i> Na-bookmark';
+                alert('Naka-save na sa Bookmarks!');
+            }
+            localStorage.setItem('novelife_bookmarks', JSON.stringify(bookmarks));
+            if (currentTab === 'Bookmarks') renderBooks();
+        }
+
+        function renderBooks() {
+            const container = document.getElementById('book-grid-container');
+            container.innerHTML = '';
+
+            let filtered = allStories;
+
+            if (currentTab === 'Bookmarks') {
+                const bookmarkedIds = getBookmarks();
+                filtered = allStories.filter(s => bookmarkedIds.includes(String(s.id)));
+            } else if (isViewingMyPosts && currentUser) {
+                filtered = allStories.filter(s => (s.author || '').toLowerCase() === currentUser.toLowerCase());
+            } else if (!isViewingMyPosts && currentTab !== 'For You') {
+                filtered = allStories.filter(s => (s.category || '').toLowerCase() === currentTab.toLowerCase());
+            }
+
+            if (searchQuery) {
+                filtered = filtered.filter(s => 
+                    (s.title && s.title.toLowerCase().includes(searchQuery)) || 
+                    (s.author && s.author.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            if (filtered.length === 0) {
+                let msg = currentTab === 'Bookmarks' ? 'Wala ka pang naka-bookmark na libro.' : (isViewingMyPosts ? 'Wala ka pang naipupublish na kwento.' : `Walang nahanap na libro.`);
+                container.innerHTML = `<p style="grid-column: span 3; text-align: center; color: var(--text-sub); padding: 30px 0;">${msg}</p>`;
+                return;
+            }
+
+            filtered.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+
+                const coverImageSrc = book.cover ? book.cover : 'https://via.placeholder.com/120x160/8D5B4C/ffffff?text=Novelife';
+                const badgeHtml = book.hasBadge ? '<div class="badge-n">N</div>' : '';
+
+                card.innerHTML = `
+                    <div class="book-cover-wrapper" onclick="openReaderModal('${book.id}')">
+                        ${badgeHtml}
+                        <img src="${coverImageSrc}" class="book-cover-img" alt="${escapeHTML(book.title)}">
+                    </div>
+                    <div class="book-info-box" onclick="openReaderModal('${book.id}')">
+                        <div class="book-title">${escapeHTML(book.title)}</div>
+                        <div class="book-author"><i class="fa-solid fa-user"></i> ${escapeHTML(book.author)}</div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function splitTextIntoPages(fullText, linesPerPage = 8) {
+            if (!fullText) return ["Walang nilalaman."];
+            const lines = fullText.split('\n');
+            let pages = [];
+            let currentPageLines = [];
+
+            lines.forEach((line) => {
+                currentPageLines.push(line);
+                if (currentPageLines.length >= linesPerPage) {
+                    pages.push(currentPageLines.join('\n'));
+                    currentPageLines = [];
+                }
+            });
+
+            if (currentPageLines.length > 0) pages.push(currentPageLines.join('\n'));
+            return pages.length > 0 ? pages : ["Walang nilalaman."];
+        }
+
+        function updateReaderPageDisplay() {
+            const contentBox = document.getElementById('modal-book-content');
+            const indicator = document.getElementById('page-indicator-text');
+            const prevBtn = document.getElementById('prev-page-btn');
+            const nextBtn = document.getElementById('next-page-btn');
+
+            contentBox.innerText = readerPages[currentReaderPageIndex] || "";
+            indicator.innerText = `Pahina ${currentReaderPageIndex + 1} / ${readerPages.length}`;
+
+            prevBtn.disabled = currentReaderPageIndex === 0;
+            nextBtn.disabled = currentReaderPageIndex >= readerPages.length - 1;
+        }
+
+        function changeReaderPage(direction) {
+            const newIndex = currentReaderPageIndex + direction;
+            if (newIndex >= 0 && newIndex < readerPages.length) {
+                currentReaderPageIndex = newIndex;
+                updateReaderPageDisplay();
+                const contentBox = document.getElementById('modal-book-content');
+                if (contentBox) contentBox.scrollTop = 0;
+            }
+        }
+
+        function openReaderModal(id) {
+            const book = allStories.find(b => String(b.id) === String(id));
+            if (!book) return;
+
+            currentlyReadingBookId = id;
+            document.getElementById('modal-book-title').innerText = book.title;
+            document.getElementById('modal-book-author').innerHTML = `<i class="fa-solid fa-user"></i> ${book.author}`;
+            
+            readerPages = splitTextIntoPages(book.content, 8);
+            currentReaderPageIndex = 0;
+            updateReaderPageDisplay();
+
+            const bookmarks = getBookmarks();
+            const bookmarkBtn = document.getElementById('bookmark-action-btn');
+            if (bookmarks.includes(String(id))) {
+                bookmarkBtn.innerHTML = '<i class="fa-solid fa-bookmark" style="color:var(--primary-coffee);"></i> Na-bookmark';
+            } else {
+                bookmarkBtn.innerHTML = '<i class="fa-regular fa-bookmark"></i> Bookmark';
+            }
+
+            const imgContainer = document.getElementById('modal-book-img');
+            if (book.cover) {
+                imgContainer.innerHTML = `<img src="${book.cover}" alt="Cover">`;
+            } else {
+                imgContainer.innerHTML = '';
+            }
+
+            imgContainer.style.display = isImageHidden ? 'none' : 'block';
+            document.getElementById('reader-modal').classList.add('active');
+        }
+
+        function closeReaderModal() {
+            stopAutoScroll();
+            document.getElementById('reader-modal').classList.remove('active');
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+    </script>
 </body>
 </html>
